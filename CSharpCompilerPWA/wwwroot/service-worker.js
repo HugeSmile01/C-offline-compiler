@@ -1,8 +1,9 @@
-const CACHE_NAME = 'csharp-compiler-v1';
+const CACHE_NAME = 'csharp-compiler-v1.0.0';
 const urlsToCache = [
   '/',
   '/css/site.css',
   '/js/site.js',
+  '/js/compiler.js',
   '/js/monaco-loader.js',
   '/manifest.json'
 ];
@@ -15,7 +16,10 @@ self.addEventListener('install', event => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
-      .catch(err => console.log('Cache install error:', err))
+      .catch(err => {
+        console.error('Cache installation failed:', err.message);
+        console.error('Failed to cache resources. The app may not work offline.');
+      })
   );
 });
 
