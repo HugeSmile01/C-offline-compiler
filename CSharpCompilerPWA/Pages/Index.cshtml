@@ -1,0 +1,142 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "C# Compiler Pro";
+}
+
+<div class="compiler-container">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>C# Compiler Pro</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <button class="header-btn" id="newProjectBtn" title="New Project">
+                <i class="fas fa-file"></i>
+            </button>
+            <button class="header-btn" id="openProjectBtn" title="Open Project">
+                <i class="fas fa-folder-open"></i>
+            </button>
+            <button class="header-btn" id="saveProjectBtn" title="Save Project">
+                <i class="fas fa-save"></i>
+            </button>
+            <button class="header-btn" id="exportBtn" title="Export">
+                <i class="fas fa-download"></i>
+            </button>
+            <button class="header-btn" id="importBtn" title="Import">
+                <i class="fas fa-upload"></i>
+            </button>
+        </div>
+        <div class="header-right">
+            <button class="header-btn" id="settingsBtn" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="header-btn" id="themeToggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Files</h3>
+                <button class="sidebar-btn" id="addFileBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="file-tree" id="fileTree">
+                <div class="file-item active" data-file="main.cs">
+                    <i class="fas fa-file-code"></i>
+                    <span>Program.cs</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Editor Area -->
+        <div class="editor-area">
+            <div class="editor-header">
+                <div class="tabs" id="editorTabs">
+                    <div class="tab active" data-file="main.cs">
+                        <span>Program.cs</span>
+                        <button class="tab-close">×</button>
+                    </div>
+                </div>
+            </div>
+            <div id="editor" class="code-editor"></div>
+            <div class="editor-footer">
+                <span class="status-item"><i class="fas fa-code"></i> C#</span>
+                <span class="status-item" id="lineColumn">Ln 1, Col 1</span>
+                <span class="status-item" id="charCount">0 characters</span>
+            </div>
+        </div>
+
+        <!-- Console Panel -->
+        <div class="console-panel" id="consolePanel">
+            <div class="console-header">
+                <div class="console-tabs">
+                    <button class="console-tab active" data-tab="output">
+                        <i class="fas fa-terminal"></i> Output
+                    </button>
+                    <button class="console-tab" data-tab="input">
+                        <i class="fas fa-keyboard"></i> Input
+                    </button>
+                    <button class="console-tab" data-tab="shell">
+                        <i class="fas fa-terminal"></i> Shell
+                    </button>
+                </div>
+                <div class="console-actions">
+                    <button class="action-btn primary" id="runBtn">
+                        <i class="fas fa-play"></i> Run
+                    </button>
+                    <button class="action-btn" id="compileBtn">
+                        <i class="fas fa-check"></i> Compile
+                    </button>
+                    <button class="action-btn" id="clearConsoleBtn">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+            </div>
+            <div class="console-content">
+                <div class="console-pane active" id="outputPane">
+                    <div class="output-content" id="outputContent">
+                        <div class="welcome-message">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Welcome to C# Compiler Pro! Write your code and click Run to execute.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="console-pane" id="inputPane">
+                    <textarea class="input-area" id="inputArea" placeholder="Enter input for your program here..."></textarea>
+                </div>
+                <div class="console-pane" id="shellPane">
+                    <div class="shell-output" id="shellOutput"></div>
+                    <div class="shell-input-container">
+                        <span class="shell-prompt">$</span>
+                        <input type="text" class="shell-input" id="shellInput" placeholder="Enter shell command..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resize Handles -->
+    <div class="resize-handle vertical" id="sidebarResize"></div>
+    <div class="resize-handle horizontal" id="consoleResize"></div>
+</div>
+
+<!-- File Input (Hidden) -->
+<input type="file" id="fileInput" accept=".cs,.txt" style="display: none;" />
+<input type="file" id="projectInput" accept=".json" style="display: none;" />
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.min.js"></script>
+    <script src="~/js/monaco-loader.js" asp-append-version="true"></script>
+    <script src="~/js/compiler.js" asp-append-version="true"></script>
+}
+
